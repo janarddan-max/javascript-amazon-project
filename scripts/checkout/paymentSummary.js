@@ -6,7 +6,7 @@ import { formatCurrency } from '../utils/money.js';
 export function renderPaymentSummary(){
     let productPriceCents = 0;
     let shippingPriceCents = 0;
-    
+    let totalItems = 0;
     cart.forEach(cartItem => {
         const product = getProduct(cartItem.id);
         productPriceCents += product.priceCents * cartItem.quantity;
@@ -14,6 +14,7 @@ export function renderPaymentSummary(){
         const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
         console.log(deliveryOption);
         shippingPriceCents += deliveryOption.priceCents;
+        totalItems += cartItem.quantity;
         
     });
     const totalBeforeforeTaxCents = productPriceCents + shippingPriceCents;
@@ -26,7 +27,7 @@ export function renderPaymentSummary(){
           </div>
 
           <div class="payment-summary-row">
-            <div>Items (3):</div>
+            <div>Items (${totalItems}):</div>
             <div class="payment-summary-money">$${formatCurrency(productPriceCents)}</div>
           </div>
 
@@ -56,4 +57,11 @@ export function renderPaymentSummary(){
     `;
 
     document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML;
+
+    // const checkoutHeaderHTML = `
+    // Checkout (<a class="return-to-home-link"
+    //         href="amazon.html">${totalItems} items</a>)
+    // `;
+    // document.querySelector('.js-checkout-header').innerHTML = checkoutHeaderHTML;
+
 }
