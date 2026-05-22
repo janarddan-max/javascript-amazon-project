@@ -7,7 +7,7 @@ export function renderCheckoutHeader(){
     });
     const checkoutHeaderHTML = `
     Checkout (<a class="return-to-home-link"
-            href="amazon.html">${totalItems} items</a>)
+            href="index.html">${totalItems} items</a>)
     `;
     document.querySelector('.js-checkout-header').innerHTML = checkoutHeaderHTML;
 }
